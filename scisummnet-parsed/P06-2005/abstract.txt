@@ -1,0 +1,1 @@
+Jelinek. 1991. language modeling speech In A. Waibel and K.F. Lee, editors, Readings in Speech Recognition, pages 450-506. Morgan Kaufmann, 1991 D. Kernighan, K Church and W. Gale. 1990. spelling correction program based on a noisy model. Kukich. 1992. for automatically corwords in ACM Computing Surveys,

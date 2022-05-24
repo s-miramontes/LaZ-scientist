@@ -1,0 +1,1 @@
+stochastic parsers use grammars, where each word type idiosyncratically prefers particular complements with parhead words. We present parsing algorithms for two bilexical formalisms, improvthe prior upper bounds of For a comspecial case that was known to allow (Eisner, 1997), we present an algorithm with an improved grammar constant.

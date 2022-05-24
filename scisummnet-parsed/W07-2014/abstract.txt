@@ -1,0 +1,1 @@
+The TempEval task proposes a simple way to evaluate automatic extraction of temporalrelations. It avoids the pitfalls of evaluating a graph of inter-related labels by defining three sub tasks that allow pairwise eval uation of temporal relations. The task not only allows straightforward evaluation, italso avoids the complexities of full tempo ral parsing.

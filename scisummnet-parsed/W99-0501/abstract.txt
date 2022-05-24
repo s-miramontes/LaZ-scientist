@@ -1,0 +1,1 @@
+Montemagni and Structural Patterns vs string patterns for extracting semantic from dictionaries In of '92, pp 546-552 Y Ravin Disambiguating and interpreting verb def

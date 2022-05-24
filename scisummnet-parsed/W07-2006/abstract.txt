@@ -1,0 +1,1 @@
+This paper presents the coarse-grained En glish all-words task at SemEval-2007. We describe our experience in producing acoarse version of the WordNet sense inven tory and preparing the sense-tagged corpusfor the task. We present the results of participating systems and discuss future direc tions.
