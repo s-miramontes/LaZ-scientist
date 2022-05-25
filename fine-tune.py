@@ -15,7 +15,7 @@ with open("scisummnet-parsed/valid-ids.txt", "r") as f:
     doc_ids = f.read().splitlines()
 
 # Subset for script testing
-doc_ids = doc_ids[:10]
+# doc_ids = doc_ids[:25]
 
 # Load in all the documents and abstracts
 print("Loading in documents and abstracts...")
@@ -73,14 +73,6 @@ model_name = f"google/pegasus-{suffix}"
 train_dataset, val_dataset, tokenizer = prepare_data(model_name, train_texts, train_labels, val_texts, val_labels)
 print("Prepared data.")
 
-# Define metric for evaluation
-metric = load_metric("rouge")
-def compute_metrics(eval_pred):
-    translated, labels = eval_pred
-    summaries = tokenizer.batch_decode(translated, skip_special_tokens = True)
-    return metric.compute(predictions = summaries, references = labels)
-print("Created metric.")
-
 # Load the model
 model = PegasusForConditionalGeneration.from_pretrained(model_name).to(device)
 print("Loaded model.")
@@ -88,11 +80,12 @@ print("Loaded model.")
 # Set up training arguments
 training_args = TrainingArguments(
     output_dir = f"fine-tune/{suffix}",
-    num_train_epochs = 2,
+    save_total_limit = 5,
+    num_train_epochs = 25,
     per_device_train_batch_size = 1,
     per_device_eval_batch_size = 1,
     evaluation_strategy = "epoch",
-    weight_decay = 0.01
+    weight_decay = 0.01,
 )
 
 # Set up trainer
@@ -102,7 +95,6 @@ trainer = Trainer(
     train_dataset = train_dataset,
     eval_dataset = val_dataset,
     tokenizer = tokenizer,
-    compute_metrics = compute_metrics
 )
 
 # Train!
