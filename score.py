@@ -1,12 +1,3 @@
-# Compute baseline ROUGE scores for summaries from non-fine-tuned
-# PEGASUS models, and save the results to file.
-
-# USAGE: python baseline.py [suffix]
-
-# EXAMPLE: python baseline.py arxiv
-# This will use the google/pegasus-arxiv model and
-# save the output to baselines/arxiv.csv.
-
 # Imports
 import sys
 import pandas as pd
@@ -15,8 +6,11 @@ from tqdm import tqdm
 from transformers import PegasusForConditionalGeneration, PegasusTokenizer
 from datasets import load_metric
 
-# Get the supplied suffix
-suffix = sys.argv[1]
+# Get command-line arguments
+model_name = sys.argv[1]
+tokenizer_name = sys.argv[2]
+outfile = sys.argv[3]
+device = sys.argv[4]
 
 # Get the list of document IDs
 with open("scisummnet-parsed/valid-ids.txt", "r") as f:
@@ -34,10 +28,7 @@ for doc_id in tqdm(doc_ids, ncols = 64):
         documents[doc_id] = " ".join(f.read().splitlines())
 
 # Create processing objects
-model_name = f"google/pegasus-{suffix}"
-device = "cuda" if torch.cuda.is_available() else "cpu"
-print(f"Selected device: {device}.")
-tokenizer = PegasusTokenizer.from_pretrained(model_name)
+tokenizer = PegasusTokenizer.from_pretrained(tokenizer_name)
 print("Created tokenizer.")
 model = PegasusForConditionalGeneration.from_pretrained(model_name).to(device)
 print("Created model.")
@@ -64,7 +55,6 @@ for doc_id in tqdm(doc_ids, ncols = 64):
     scores["rougeL"].append(score["rougeL"].mid.fmeasure)
 
 # Save results
-outfile = f"baselines/{suffix}.csv"
 scores_df = pd.DataFrame.from_dict(scores)
 scores_df.to_csv(outfile, index = False)
 print(f"Saved results to {outfile}.")
