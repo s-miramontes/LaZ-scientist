@@ -80,8 +80,8 @@ print("Loaded model.")
 # Set up training arguments
 training_args = TrainingArguments(
     output_dir = f"fine-tune/{suffix}",
-    save_total_limit = 5,
-    num_train_epochs = 25,
+    save_total_limit = 10,
+    num_train_epochs = 100,
     per_device_train_batch_size = 1,
     per_device_eval_batch_size = 1,
     evaluation_strategy = "epoch",
