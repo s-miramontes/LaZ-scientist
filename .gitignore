@@ -1,2 +1,6 @@
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
+
+# Big checkpoint files
+**/optimizer.pt
+**/pytorch_model.bin
